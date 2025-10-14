@@ -47,7 +47,9 @@ const paraulaActiva = computed(() => {
   return estatDelJoc.value.paraules[estatDelJoc.value.indexParaulaActiva];
 });
 
-    function iniciarCronometreParaula() {
+let tempsIniciParaula = 0;
+
+function iniciarCronometreParaula() {
   tempsIniciParaula = Date.now();
 }
 
@@ -89,4 +91,11 @@ function validarProgres() {
   }
 }
 </script>
+
+<style>
+.paraula-activa {
+  font-weight: bold;
+  background-color: yellow;
+}
+</style>
 
