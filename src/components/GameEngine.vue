@@ -33,11 +33,11 @@ import { ref, computed } from 'vue';
 const estatDelJoc = ref({
   // Llista de paraules a escriure. Cada paraula és un objecte.
   paraules: [
-    { id: 1, text: 'component', estat: 'pendent' },
-    { id: 2, text: 'reactivitat', estat: 'pendent' },
-    { id: 3, text: 'javascript', estat: 'pendent' },
-    { id: 4, text: 'framework', estat: 'pendent' },
-    { id: 5, text: 'template', estat: 'pendent' }
+    { id: 1, text: 'component', estat: 'pendent', error:0},
+    { id: 2, text: 'reactivitat', estat: 'pendent', error:0},
+    { id: 3, text: 'javascript', estat: 'pendent', error:0},
+    { id: 4, text: 'framework', estat: 'pendent', error:0},
+    { id: 5, text: 'template', estat: 'pendent', error:0}
   ],
   // L'índex de la paraula que l'usuari ha d'escriure ara mateix.
   indexParaulaActiva: 0,
@@ -47,6 +47,7 @@ const estatDelJoc = ref({
   estadistiques: [],
 });
 
+// Compara l'última lletra introduïda per canviar entre classes en funció si són iguals (Correcte) o no (Incorrecte) 
 function getClassLletra(indexLletra){
   const lletraEsperada = paraulaActiva.value.text[indexLletra];
   const lletraIntroduida = estatDelJoc.value.textEntrat[indexLletra];
@@ -78,6 +79,11 @@ function validarProgres() {
     iniciarCronometreParaula();
   }
 
+  //Compara 
+  if (!paraulaActiva.value.text.startsWith(estatDelJoc.value.textEntrat)){
+    paraulaActiva.value.error++
+  }
+
   // Comprovem si la paraula escrita és igual a la paraula activa
   if (estatDelJoc.value.textEntrat === paraulaActiva.value.text) {
     const tempsTrigat = Date.now() - tempsIniciParaula;
@@ -86,7 +92,7 @@ function validarProgres() {
     estatDelJoc.value.estadistiques.push({
       paraula: paraulaActiva.value.text,
       temps: tempsTrigat,
-      errors: 0, // De moment no comptem errors
+      error: paraulaActiva.value.error
     });
 
     // Marquem la paraula com a completada
