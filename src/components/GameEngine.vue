@@ -8,8 +8,13 @@
         class="paraula"
         :class="{ 'paraula-activa': index === estatDelJoc.indexParaulaActiva }"
       >
-        <!-- Més endavant mostrarem les lletres aquí -->
-        {{ paraula.text }}
+        <div v-if="index === estatDelJoc.indexParaulaActiva">
+          <span v-for="(caracter, index) in paraula.text.split('')"
+            :key="index"
+            :class=getClassLletra(index)
+          > {{ caracter }}
+        </span></div>
+        <div v-else>{{ paraula.text }}</div>
       </div>
     </div>
     <input 
@@ -41,6 +46,19 @@ const estatDelJoc = ref({
   // Un array on guardarem els resultats de cada paraula.
   estadistiques: [],
 });
+
+function getClassLletra(indexLletra){
+  const lletraEsperada = paraulaActiva.value.text[indexLletra];
+  const lletraIntroduida = estatDelJoc.value.textEntrat[indexLletra];
+
+  if (!lletraIntroduida) {
+    return '';
+  } else if (lletraIntroduida === lletraEsperada) {
+    return 'correcta'
+  } else {
+    return 'incorrecta'
+  }
+}
 
 // Afegeix també una propietat computada per accedir fàcilment a la paraula activa
 const paraulaActiva = computed(() => {
@@ -96,6 +114,14 @@ function validarProgres() {
 .paraula-activa {
   font-weight: bold;
   background-color: yellow;
+}
+
+.correcta {
+  color: green;
+}
+
+.incorrecta{
+  color: red;
 }
 </style>
 
