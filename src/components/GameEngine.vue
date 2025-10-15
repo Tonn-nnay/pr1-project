@@ -117,6 +117,19 @@ function validarProgres() {
 </script>
 
 <style>
+.paraules-container{
+  margin: auto;
+  width: 50%;
+}
+
+.game-engine{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: 30px;
+}
+
 .paraula-activa {
   font-weight: bold;
   background-color: yellow;
@@ -128,6 +141,11 @@ function validarProgres() {
 
 .incorrecta{
   color: red;
+}
+
+.text-input{
+  margin-top: 30px;
+  text-align: center;
 }
 </style>
 

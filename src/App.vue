@@ -8,4 +8,6 @@ import Teclat from './components/Teclat.vue';
   <Teclat />
 </template>
 
-<style scoped></style>
+<style scoped>
+  
+</style>
