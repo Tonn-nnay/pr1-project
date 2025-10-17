@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { io } from 'socket.io-client';
 import GameEngine from './components/GameEngine.vue';
 import Teclat from './components/Teclat.vue';  
 
@@ -8,6 +10,19 @@ const vistaActual = ref('salaEspera'); // 'salaEspera', 'lobby', 'joc'
 const nomJugador = ref('');
 const jugadors = ref([]);
 let socket = null;
+
+onMounted(() => {
+  socket = io('http://localhost:8080');
+
+  socket.on('updatePlayerList', (llistaDeJugadors) => {
+    jugadors.value = llistaDeJugadors
+    vistaActual.value = 'lobby'
+  })
+})
+
+function connectarAlServidor(){
+  socket.emit('setPlayerName', nomJugador.value); 
+}
 </script>
 
 <template>
