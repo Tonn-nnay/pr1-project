@@ -1,0 +1,23 @@
+services:
+  node:
+    image: 
+      - node:latest
+    volume:
+      - ./:/pr1-project
+    command:
+      sh -c "npm run prodBack" 
+    networks:
+
+  apache:
+    image:
+      - apache:latest
+    volume:
+      - ./:/pr1-project
+    command:
+      sh -c " cd /pr1-project && npm install && npm run prod"
+    ports:
+      - 8080:80
+networks:
+  basic:
+    driver: bridge
+    
