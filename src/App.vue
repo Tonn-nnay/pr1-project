@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import GameEngine from './components/GameEngine.vue';
 import Teclat from './components/Teclat.vue';  
@@ -11,15 +10,6 @@ const vistaActual = ref('salaEspera'); // 'salaEspera', 'lobby', 'joc'
 const nomJugador = ref('');
 const jugadors = ref([]);
 let socket = null;
-
-onMounted(() => {
-  /*socket.on('updatePlayerList', (llistaDeJugadors) => {
-    jugadors.value = llistaDeJugadors
-    vistaActual.value = 'lobby'
-  })*/
-
-  
-})
 
 function connectarAlServidor(){
   communicationManager.connect(nomJugador.value)
@@ -42,7 +32,7 @@ function connectarAlServidor(){
     <!-- VISTA 2: LOBBY -->
     <div v-else-if="vistaActual === 'lobby'" class="vista-container">
       <h2>Jugadors Connectats</h2>
-      <ul>
+      <ul class="jugadors">
         <li v-for="jugador in jugadors" :key="jugador.id">{{ jugador.name }}</li>
       </ul>
       <button @click="vistaActual = 'joc'">Comença a Jugar!</button>
@@ -57,5 +47,22 @@ function connectarAlServidor(){
 </template>
 
 <style scoped>
-  
+
+html, div{
+  font-size: 100%;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: auto;
+  padding: 5px 0;
+  width: 40%;
+  border: 1px solid black;
+}
+
 </style>

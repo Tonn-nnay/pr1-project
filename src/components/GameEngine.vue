@@ -116,7 +116,7 @@ function validarProgres() {
 }
 </script>
 
-<style>
+<style scoped>
 .paraules-container{
   margin: auto;
   width: 50%;
@@ -146,6 +146,7 @@ function validarProgres() {
 .text-input{
   margin-top: 30px;
   text-align: center;
+  size: 40%;
 }
 </style>
 
