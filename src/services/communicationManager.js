@@ -2,7 +2,7 @@
 import { io } from 'socket.io-client';
 
 // Creem una única instància del socket per a tota l'aplicació
-const socket = io('http://localhost:8080', { autoConnect: false });
+const socket = io('http://a22tonmarmar.daw.inspedralbes.cat:26741', { autoConnect: false });
 
 // Aquest objecte serà la nostra API per comunicar-nos
 const communicationManager = {
